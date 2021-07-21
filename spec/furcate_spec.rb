@@ -23,17 +23,17 @@ RSpec.describe Furcate do
     Furcate.commit
     expect(Branchable.find(branchable.object_id)).to equal(branchable)
 
-    Furcate.create_and_switch_to_branch("cleanup branch")
+    Furcate.create_and_switch_to_limb("cleanup branch")
 
     branchable.delete
     expect(Furcate.staged_changes[branchable]).to equal(:deletion)
     Furcate.commit
     expect(Branchable.find(branchable.object_id)).to be_nil
 
-    Furcate.switch_to_branch("main")
+    Furcate.switch_to_limb("main")
     expect(Branchable.find(branchable.object_id)).to equal(branchable)
 
-    Furcate.merge_branch_in_to_current("cleanup branch")
+    Furcate.merge_limb_in_to_current("cleanup branch")
     expect(Branchable.find(branchable.object_id)).to be_nil
   end
 end

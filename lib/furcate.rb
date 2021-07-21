@@ -12,7 +12,7 @@ module Furcate
   @@tree = []
   @@parent_commit = nil
   @@references = {"main": nil}
-  @@current_branch_name = "main"
+  @@current_limb_name = "main"
   @@head = nil
 
   def self.staged_changes
@@ -33,7 +33,7 @@ module Furcate
     new_commit = Commit.new(message, parent_commit, tree.dup)
     @@parent_commit = new_commit
     @@staged_changes = {}
-    @@references[@@current_branch_name] = new_commit
+    @@references[@@current_limb_name] = new_commit
     @@head = new_commit
   end
 
@@ -45,23 +45,23 @@ module Furcate
     @@parent_commit
   end
 
-  def self.create_and_switch_to_branch(branch_name)
-    @@references[branch_name] = @@head
-    @@current_branch_name = branch_name
+  def self.create_and_switch_to_limb(limb_name)
+    @@references[limb_name] = @@head
+    @@current_limb_name = limb_name
   end
 
-  def self.switch_to_branch(branch_name)
-    @@head = @@references[branch_name]
+  def self.switch_to_limb(limb_name)
+    @@head = @@references[limb_name]
     @@tree = @@head.tree
-    @@current_branch_name = branch_name
+    @@current_limb_name = limb_name
   end
 
-  def self.merge_branch_in_to_current(source_branch_name, message = "")
-    destination_branch_name = @@current_branch_name
-    new_commit = Commit.new(message, @@references[destination_branch_name], @@references[source_branch_name].tree.clone)
+  def self.merge_limb_in_to_current(scion, message = "")
+    rootstock = @@current_limb_name
+    new_commit = Commit.new(message, @@references[rootstock], @@references[scion].tree.clone)
     @@parent_commit = new_commit
     @@staged_changes = {}
-    @@references[@@current_branch_name] = new_commit
+    @@references[@@current_limb_name] = new_commit
     @@head = new_commit
     @@tree = new_commit.tree
   end
