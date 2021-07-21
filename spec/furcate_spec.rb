@@ -13,18 +13,18 @@ RSpec.describe Furcate do
     expect(Furcate.staged_changes[branchable]).to equal(:addition)
     Furcate.commit
     expect(Furcate.staged_changes).to be_empty
-    expect(Furcate.tree).to match_array([branchable])
+    expect(Branchable.find(branchable.object_id)).to equal(branchable)
 
     branchable.update
     expect(Furcate.staged_changes[branchable]).to equal(:addition)
     Furcate.commit
     expect(Furcate.staged_changes).to be_empty
-    expect(Furcate.tree).to match_array([branchable])
+    expect(Branchable.find(branchable.object_id)).to equal(branchable)
 
     branchable.delete
     expect(Furcate.staged_changes[branchable]).to equal(:deletion)
     Furcate.commit
     expect(Furcate.staged_changes).to be_empty
-    expect(Furcate.tree).to match_array([])
+    expect(Branchable.find(branchable.object_id)).to be_nil
   end
 end

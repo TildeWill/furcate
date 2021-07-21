@@ -14,8 +14,11 @@ module Furcate
       Furcate.stage_addition(self)
     end
 
-    def to_stage_name
-      "BOOGIE"
+    def self.find(object_id)
+      Furcate.tree.find{|furcateable| furcateable.object_id == object_id}
     end
+    # def to_stage_name
+    #   "BOOGIE"
+    # end
   end
 end
