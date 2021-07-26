@@ -15,7 +15,7 @@ module Furcate
     end
 
     def self.find(object_id)
-      Furcate.tree.find{|furcateable| furcateable.object_id == object_id}
+      Furcate.find{|furcateable| furcateable.object_id == object_id}
     end
     # def to_stage_name
     #   "BOOGIE"
