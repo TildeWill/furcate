@@ -33,7 +33,7 @@ RSpec.describe Furcate do
     Furcate.switch_to_limb("main")
     expect(Branchable.find(branchable.object_id)).to equal(branchable)
 
-    # Furcate.merge_limb_in_to_current("cleanup branch")
+    # Furcate.merge_limb_in_  to_current("cleanup branch")
     # expect(Branchable.find(branchable.object_id)).to be_nil
   end
 end

@@ -1,8 +1,11 @@
-# Furcate
+# furcate
+[ verb fur-keyt ] _to form a fork; branch._
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/furcate`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+When you want to enable your users to "branch" and "merge" data the same way you 
+branch and merge code, then **furcate is for you**. It replaces `ActiveRecord::Base` 
+on your models, storing each change to the model in a separate row in the database. 
+Changes are recorded as commits. Together they form snapshots of the data your users
+interact with. 
 
 ## Installation
 
@@ -22,7 +25,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'furcate'
+
+class Team < Furcate::Base
+end
+```
+
+```ruby
+team = Team.new
+team.create("The A Team")
+
+#commit to default limb named "main"
+Furcate.commit("First commit")
+
+#switch to a new limb
+Furcate.create_and_switch_to_limb("cleanup branch")
+
+# remove the team
+team.delete
+Furcate.commit("Removes the team")
+
+#switch back to the main limb
+Furcate.switch_to_limb("main")
+```
 
 ## Development
 
