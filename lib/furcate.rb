@@ -6,7 +6,6 @@ require "furcate/commit"
 require "furcate/stage"
 
 module Furcate
-  class Error < StandardError; end
   @@staged_changes = {}
 
   @@stage = Stage.new
