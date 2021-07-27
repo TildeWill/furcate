@@ -2,7 +2,7 @@
 [ verb fur-keyt ] _to form a fork; branch._
 
 When you want to enable your users to "branch" and "merge" data the same way you 
-branch and merge code, then **furcate is for you**. It replaces `ActiveRecord::Base` 
+branch and merge code, then **furcate** is for you. It replaces `ActiveRecord::Base` 
 on your models, storing each change to the model in a separate row in the database. 
 Changes are recorded as commits. Together they form snapshots of the data your users
 interact with. 
