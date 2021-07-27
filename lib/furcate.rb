@@ -4,6 +4,7 @@ require "furcate/version"
 require "furcate/base"
 require "furcate/commit"
 require "furcate/stage"
+require "furcate/tree"
 require "furcate/furcator"
 
 module Furcate
