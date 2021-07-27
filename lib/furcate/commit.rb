@@ -12,14 +12,6 @@ module Furcate
       @leaves.freeze
     end
 
-    def add(leaf_to_add)
-      @leaves.push(leaf_to_add).uniq!
-    end
-
-    def delete(leaf_to_delete)
-      @leaves.reject!{ |leaf| leaf == leaf_to_delete }
-    end
-
     def find(&block)
       @leaves.find(&block)
     end
