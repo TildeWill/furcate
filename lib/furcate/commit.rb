@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 module Furcate
   class Commit
     attr_reader :message, :parent_commit, :tree
+
     def initialize(message, parent_commit, stage)
       @message = message
       @parent_commit = parent_commit
@@ -14,8 +17,9 @@ module Furcate
     end
 
     private
+
     def build_new_tree(tree, stage)
-      #add the additions from the staged tree
+      # add the additions from the staged tree
       stage.additions.each do |change|
         tree.add(change)
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Furcate
   class Stage
     def initialize
@@ -17,11 +19,11 @@ module Furcate
     end
 
     def additions
-      @changes.filter{|_,change_type| change_type == :addition}.keys
+      @changes.filter{ |_, change_type| change_type == :addition }.keys
     end
 
     def deletions
-      @changes.filter{|_,change_type| change_type == :deletion}.keys
+      @changes.filter{ |_, change_type| change_type == :deletion }.keys
     end
   end
 end

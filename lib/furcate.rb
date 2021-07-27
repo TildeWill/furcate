@@ -1,7 +1,6 @@
 # frozen_string_literal: true
-# require "active_record"
+
 require "furcate/version"
-require "furcate/railtie" if defined?(Rails::Railtie)
 require "furcate/base" if defined?(Rails::Railtie)
 require "furcate/commit" if defined?(Rails::Railtie)
 require "furcate/stage" if defined?(Rails::Railtie)
@@ -12,7 +11,7 @@ module Furcate
   @@staged_changes = {}
 
   @@stage = Stage.new
-  @@references = {"main" => nil}
+  @@references = { "main" => nil }
   @@current_limb_name = "main"
   @@head = nil
 

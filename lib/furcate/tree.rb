@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module Furcate
   class Tree
     include Enumerable
 
     attr_reader :leaves
+
     def initialize(leaves = [])
       @leaves = Array.new(leaves)
     end
@@ -12,7 +15,7 @@ module Furcate
     end
 
     def delete(leaf_to_delete)
-      @leaves.reject!{|leaf| leaf == leaf_to_delete}
+      @leaves.reject!{ |leaf| leaf == leaf_to_delete }
     end
 
     def each(&block)
@@ -24,7 +27,7 @@ module Furcate
     end
 
     def make_commit
-      self.freeze
+      freeze
       @leaves.freeze
     end
   end
