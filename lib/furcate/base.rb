@@ -10,7 +10,7 @@ module Furcate
       Furcate.stage_deletion(self)
     end
 
-    def update()
+    def update
       Furcate.stage_deletion(self)
       # apply changes to object
       Furcate.stage_addition(self)

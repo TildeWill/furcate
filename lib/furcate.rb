@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 require "furcate/version"
-require "furcate/base" if defined?(Rails::Railtie)
-require "furcate/commit" if defined?(Rails::Railtie)
-require "furcate/stage" if defined?(Rails::Railtie)
-require "furcate/tree" if defined?(Rails::Railtie)
+require "furcate/base"
+require "furcate/commit"
+require "furcate/stage"
 
 module Furcate
   class Error < StandardError; end
