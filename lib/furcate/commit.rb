@@ -16,10 +16,15 @@ module Furcate
       @leaves.find(&block)
     end
 
+    def diff(other_commit)
+      Diff.new(other_commit.leaves - leaves, leaves - other_commit.leaves)
+    end
+
     private
 
     def build_new_leaves(leaves, stage)
       # add the additions from the staged tree
+
       stage.additions.each do |change|
         leaves << change
       end

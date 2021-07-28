@@ -2,8 +2,10 @@
 
 module Furcate
   class Stage
-    def initialize
+    def initialize(additions = [], deletions = [])
       @changes = {}
+      additions.each{ |addition| @changes[addition] = :addition }
+      deletions.each{ |deletion| @changes[deletion] = :deletion }
     end
 
     def add(leaf)

@@ -1,15 +1,7 @@
 # frozen_string_literal: true
 
 module Furcate
-  class Tree < Array
-    def initialize(array = [])
-      super(array)
-    end
-
-    def diff(tree)
-      Diff.new(tree - self, self - tree)
-    end
-
+  class Commit
     class Diff < Hash
       def initialize(additions, deletions)
         super()
