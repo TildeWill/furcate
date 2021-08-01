@@ -25,12 +25,8 @@ module Furcate
         self[:deletions]
       end
 
-      def empty?
-        additions.empty? && deletions.empty?
-      end
-
       def same?
-        empty?
+        additions.empty? && deletions.empty?
       end
     end
   end
