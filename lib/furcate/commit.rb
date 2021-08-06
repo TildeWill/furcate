@@ -16,6 +16,18 @@ module Furcate
       @leaves.find(&block)
     end
 
+    def first_common_ancestor(scion_head, scion_commit = scion_head, rootstock_head = self)
+      return rootstock_head if rootstock_head == scion_commit
+      return scion_commit if rootstock_head.parent_commit == scion_commit
+
+      if scion_commit.parent_commit.nil?
+        first_common_ancestor(scion_head.parent_commit || scion_head, scion_head.parent_commit || scion_head,
+                              rootstock_head.parent_commit)
+      else
+        first_common_ancestor(scion_head, scion_commit.parent_commit, rootstock_head)
+      end
+    end
+
     private
 
     def build_new_leaves(leaves, stage)

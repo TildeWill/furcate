@@ -28,12 +28,4 @@ RSpec.describe Furcate::Tree do
     expect(diff.additions).to be_empty
     expect(diff.deletions).to be_empty
   end
-
-  it "compares a tree with tow of one thing to a tree with one of the same thing",
-     skip: "not sure if we need this behavior, values might be unique" do
-    diff = Furcate::Tree.new(%w[foo foo]).diff(Furcate::Tree.new(["foo"]))
-    expect(diff).to be_same
-    expect(diff.additions).to be_empty
-    expect(diff.deletions).to match_array(["foo"])
-  end
 end
