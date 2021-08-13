@@ -1,0 +1,17 @@
+module Furcate
+  class CommitDiff
+    attr_reader additions: Array[Base]
+
+    attr_reader deletions: Array[Base]
+
+    attr_reader modifications: Array[Base]
+
+    def initialize: (untyped additions, untyped deletions, untyped modifications) -> CommitDiff
+
+    def self.diff: (Commit commit, Commit other_commit) -> CommitDiff
+
+    def same?: () -> bool
+
+    def conflicts: (CommitDiff diff, CommitDiff other_diff) -> untyped
+  end
+end

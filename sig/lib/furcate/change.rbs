@@ -1,0 +1,9 @@
+module Furcate
+  class Change
+    attr_accessor change_type: (:addition | :deletion | :modification)
+
+    attr_accessor leaf: Base
+
+    def initialize: (Base leaf, (:addition | :deletion | :modification) change_type) -> void
+  end
+end

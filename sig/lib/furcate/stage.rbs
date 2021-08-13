@@ -1,0 +1,11 @@
+module Furcate
+  class Stage
+    attr_accessor staged_changes: Array[Change]
+
+    def initialize: () -> Stage
+
+    def add: (untyped leaf) -> untyped
+
+    def delete: (untyped leaf) -> untyped
+  end
+end

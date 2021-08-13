@@ -1,0 +1,23 @@
+module Furcate
+  class Furcator
+    def initialize: () -> Furcator
+
+    def staged_changes: () -> Stage
+
+    def stage_addition: (Base leaf) -> untyped
+
+    def stage_deletion: (Base leaf) -> untyped
+
+    def make_commit: (?::String message) -> untyped
+
+    def create_and_switch_to_limb: (untyped limb_name) -> untyped
+
+    def switch_to_limb: (untyped limb_name) -> untyped
+
+    def find: () { () -> untyped } -> untyped
+
+    attr_reader head: Commit
+
+    attr_reader references: untyped
+  end
+end

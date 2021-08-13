@@ -1,0 +1,5 @@
+module Furcate
+  def self.current_furcator=: (Furcator furcator) -> untyped
+
+  def self.current_furcator: () -> Furcator
+end

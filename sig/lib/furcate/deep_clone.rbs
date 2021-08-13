@@ -1,0 +1,5 @@
+module Furcate
+  class DeepClone
+    def self.clone: (untyped object) -> untyped
+  end
+end

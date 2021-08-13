@@ -1,0 +1,15 @@
+module Furcate
+  class CommitConflicts
+    class UnresolvedConflict
+      attr_reader conflict_type: (:deletion | :modification)
+
+      attr_reader object: untyped
+
+      attr_reader other_conflict_type: (:deletion | :modification)
+
+      attr_reader other_object: untyped
+
+      def initialize: ((:deletion | :modification) conflict_type, untyped object, (:deletion | :modification) other_conflict_type, untyped other_object) -> untyped
+    end
+  end
+end

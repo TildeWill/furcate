@@ -1,0 +1,25 @@
+module Furcate
+  class Commit
+    attr_reader message: String
+
+    attr_reader parent_commit: Commit
+
+    attr_reader leaves: Array[Base]
+
+    def initialize: (String message, Commit parent_commit, Stage stage) -> Commit
+
+    def find: () { () -> untyped } -> (Base | nil)
+
+    def first_common_ancestor: (Commit scion_head, ?Commit scion_commit, ?Commit rootstock_head) -> Commit
+
+    def any_matching_keys?: (Base other_leaf) -> bool
+
+    def no_matching_keys?: (Base other_leaf) -> bool
+
+    def any_matching_attributes?: (Base other_leaf) -> bool
+
+    private
+
+    def build_new_leaves: (Array[Base] leaves, Stage stage) -> Array[Base]
+  end
+end

@@ -1,0 +1,19 @@
+module Furcate
+  class Base
+    attr_reader id: untyped
+
+    attr_reader type: untyped
+
+    def create: () -> untyped
+
+    def delete: () -> untyped
+
+    def update: () -> untyped
+
+    def self.find: (untyped object_id) -> Base
+
+    def sha: () -> untyped
+
+    def diff: (Base other_leaf) -> (:no_match | :changed | :no_change)
+  end
+end

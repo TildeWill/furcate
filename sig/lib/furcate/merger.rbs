@@ -1,0 +1,7 @@
+module Furcate
+  class Merger
+    def self.check_for_conflicts: (Commit rootstock, Commit scion) -> Array[CommitConflicts::UnresolvedConflict]
+
+    def do_merge: (untyped resolved_conflicts) -> nil
+  end
+end
