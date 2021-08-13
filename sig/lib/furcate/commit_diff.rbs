@@ -6,7 +6,7 @@ module Furcate
 
     attr_reader modifications: Array[Base]
 
-    def initialize: (untyped additions, untyped deletions, untyped modifications) -> CommitDiff
+    def initialize: (untyped additions, untyped deletions, untyped modifications) -> void
 
     def self.diff: (Commit commit, Commit other_commit) -> CommitDiff
 

@@ -27,9 +27,5 @@ module Furcate
     def same?
       additions.empty? && deletions.empty? && modifications.empty?
     end
-
-    # def conflicts(diff, other_diff)
-    #   CommitConflicts.calculate_conflicts(diff, other_diff)
-    # end
   end
 end

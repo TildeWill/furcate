@@ -15,6 +15,6 @@
 target :spec do
   check "lib"
   signature "sig"
-  # library "pathname", "set"       # Standard libraries
+  library "forwardable" # Standard libraries
   # library "rspec"
 end

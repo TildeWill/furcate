@@ -1,12 +1,12 @@
 module Furcate
   class CommitConflicts
-    def self.calculate_conflicts: (CommitDiff diff, CommitDiff other_diff) -> Array[UnresolvedCommitConflict]
+    def self.calculate_conflicts: (CommitDiff diff, CommitDiff other_diff) -> Array[(UnresolvedConflict|nil)]
 
-    def self.modified_in_both: (CommitDiff diff, CommitDiff other_diff) -> Array[UnresolvedCommitConflict]
+    def self.modified_in_both: (CommitDiff diff, CommitDiff other_diff) -> Array[(UnresolvedConflict|nil)]
 
-    def self.modified_in_diff_and_deleted_in_other_diff: (CommitDiff diff, CommitDiff other_diff) -> Array[UnresolvedCommitConflict]
+    def self.modified_in_diff_and_deleted_in_other_diff: (CommitDiff diff, CommitDiff other_diff) -> Array[(UnresolvedConflict|nil)]
 
-    def self.deleted_in_diff_and_modified_in_other_diff: (CommitDiff diff, CommitDiff other_diff) -> Array[UnresolvedCommitConflict]
+    def self.deleted_in_diff_and_modified_in_other_diff: (CommitDiff diff, CommitDiff other_diff) -> Array[(UnresolvedConflict|nil)]
 
     def self.keys_match?: (Base leaf, Base other_leaf) -> bool
 

@@ -11,7 +11,7 @@ module Furcate
 
     def self.modified_in_both(diff, other_diff)
       diff.modifications.collect do |modification|
-        modified_modification = other_diff.modifications.first do |other_modification|
+        modified_modification = other_diff.modifications.find do |other_modification|
           keys_match?(modification, other_modification) && !attributes_match?(modification, other_modification)
         end
         if modified_modification
@@ -22,7 +22,7 @@ module Furcate
 
     def self.modified_in_diff_and_deleted_in_other_diff(diff, other_diff)
       diff.modifications.collect do |modification|
-        modified_deletion = other_diff.deletions.first do |other_deletion|
+        modified_deletion = other_diff.deletions.find do |other_deletion|
           keys_match?(modification, other_deletion)
         end
         if modified_deletion
@@ -34,7 +34,7 @@ module Furcate
 
     def self.deleted_in_diff_and_modified_in_other_diff(diff, other_diff)
       diff.deletions.collect do |deletion|
-        deleted_modification = other_diff.modifications.first do |other_modification|
+        deleted_modification = other_diff.modifications.find do |other_modification|
           keys_match?(deletion, other_modification)
         end
         if deleted_modification

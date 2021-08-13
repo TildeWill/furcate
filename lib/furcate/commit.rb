@@ -2,6 +2,8 @@
 
 module Furcate
   class Commit
+    extend Forwardable
+
     attr_reader :message, :parent_commit, :leaves
 
     def initialize(message, parent_commit, stage)
@@ -12,20 +14,10 @@ module Furcate
       @leaves.freeze
     end
 
-    def find(&block)
-      @leaves.find(&block)
-    end
+    def_delegator :@leaves, :find
 
-    def first_common_ancestor(scion_head, scion_commit = scion_head, rootstock_head = self)
-      return rootstock_head if rootstock_head == scion_commit
-      return scion_commit if rootstock_head.parent_commit == scion_commit
-
-      if scion_commit.parent_commit.nil?
-        first_common_ancestor(scion_head.parent_commit || scion_head, scion_head.parent_commit || scion_head,
-                              rootstock_head.parent_commit)
-      else
-        first_common_ancestor(scion_head, scion_commit.parent_commit, rootstock_head)
-      end
+    def first_common_ancestor(scion_head)
+      find_ancestor(scion_head, scion_head, self)
     end
 
     def any_matching_keys?(other_leaf)
@@ -37,11 +29,23 @@ module Furcate
     end
 
     def any_changed_attributes?(other_leaf)
-      matching_leaf = leaves.first{ |leaf| leaf.id == other_leaf.id && leaf.type == other_leaf.type }
-      matching_leaf.attributes != other_leaf.attributes
+      matching_leaf = leaves.find{ |leaf| leaf.id == other_leaf.id && leaf.type == other_leaf.type }
+      matching_leaf && matching_leaf.attributes != other_leaf.attributes
     end
 
     private
+
+    def find_ancestor(scion_head, scion_commit, rootstock_head)
+      return rootstock_head if rootstock_head == scion_commit
+      return scion_commit if rootstock_head.parent_commit == scion_commit
+
+      if scion_commit.parent_commit.nil?
+        find_ancestor(scion_head.parent_commit || scion_head, scion_head.parent_commit || scion_head,
+                      rootstock_head.parent_commit)
+      else
+        find_ancestor(scion_head, scion_commit.parent_commit, rootstock_head)
+      end
+    end
 
     def build_new_leaves(leaves, stage)
       stage.staged_changes.each do |change|

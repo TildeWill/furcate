@@ -4,6 +4,8 @@ module Furcate
 
     attr_reader type: untyped
 
+    attr_reader attributes: untyped
+
     def create: () -> untyped
 
     def delete: () -> untyped

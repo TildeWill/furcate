@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "forwardable"
 require "furcate/version"
 require "furcate/base"
 require "furcate/change"

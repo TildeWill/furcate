@@ -1,25 +1,31 @@
 module Furcate
   class Commit
+    extend Forwardable
+
     attr_reader message: String
 
     attr_reader parent_commit: Commit
 
     attr_reader leaves: Array[Base]
 
-    def initialize: (String message, Commit parent_commit, Stage stage) -> Commit
+    def initialize: (String message, Commit parent_commit, Stage stage) -> void
 
-    def find: () { () -> untyped } -> (Base | nil)
+    # def find: () { () -> untyped } -> untyped
 
-    def first_common_ancestor: (Commit scion_head, ?Commit scion_commit, ?Commit rootstock_head) -> Commit
+    def first_common_ancestor: (Commit scion_head) -> Commit
 
     def any_matching_keys?: (Base other_leaf) -> bool
 
     def no_matching_keys?: (Base other_leaf) -> bool
 
-    def any_matching_attributes?: (Base other_leaf) -> bool
+    def any_changed_attributes?: (Base other_leaf) -> bool
 
     private
 
+    def find_ancestor: (Commit scion_head, Commit scion_commit, Commit rootstock_head) -> Commit
     def build_new_leaves: (Array[Base] leaves, Stage stage) -> Array[Base]
+    def add: (Array[Base] leaves, Base change_leaf) -> void
+    def delete: (Array[Base] leaves, Base change_leaf) -> void
+    def modify: (Array[Base] leaves, Base change_leaf) -> void
   end
 end

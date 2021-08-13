@@ -2,13 +2,14 @@
 
 module Furcate
   class Furcator
+    extend Forwardable
+
     attr_reader :head, :references
 
     def initialize
       @stage = Stage.new
       @references = { "main" => nil }
       @current_limb_name = "main"
-      @head = nil
     end
 
     def staged_changes
@@ -44,8 +45,6 @@ module Furcate
       @current_limb_name = limb_name
     end
 
-    def find(&block)
-      @head.find(&block)
-    end
+    def_delegator :@head, :find
   end
 end
