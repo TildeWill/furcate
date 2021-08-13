@@ -92,3 +92,5 @@ Style/SwapValues: # (new in 1.1)
   Enabled: true
 Metrics/BlockLength:
   Enabled: false
+Metrics/MethodLength:
+  Enabled: false

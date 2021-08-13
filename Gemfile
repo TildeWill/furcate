@@ -11,6 +11,8 @@ gem "rspec"
 
 gem "rubocop"
 
+gem "steep"
+
 gem "gem-release"
 
 gem "rails", require: "rails"

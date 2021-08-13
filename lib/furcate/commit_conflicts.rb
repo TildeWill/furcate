@@ -6,18 +6,7 @@ module Furcate
       conflicts = deleted_in_diff_and_modified_in_other_diff(diff, other_diff)
       conflicts += modified_in_diff_and_deleted_in_other_diff(diff, other_diff)
       conflicts += modified_in_both(diff, other_diff)
-      conflicts
-    end
-
-    class UnresolvedCommitConflict
-      attr_reader :conflict_type, :object, :other_conflict_type, :other_object
-
-      def initialize(conflict_type, object, other_conflict_type, other_object)
-        @conflict_type = conflict_type
-        @object = object
-        @other_conflict_type = other_conflict_type
-        @other_object = other_object
-      end
+      conflicts.compact
     end
 
     def self.modified_in_both(diff, other_diff)
@@ -26,7 +15,7 @@ module Furcate
           keys_match?(modification, other_modification) && !attributes_match?(modification, other_modification)
         end
         if modified_modification
-          return UnresolvedCommitConflict.new(:modification, modification, :modification, modified_modification)
+          UnresolvedConflict.new(:modification, modification, :modification, modified_modification)
         end
       end
     end
@@ -37,8 +26,8 @@ module Furcate
           keys_match?(modification, other_deletion)
         end
         if modified_deletion
-          return UnresolvedCommitConflict.new(:modification, modification, :deletion,
-                                              modified_deletion)
+          UnresolvedConflict.new(:modification, modification, :deletion,
+                                 modified_deletion)
         end
       end
     end
@@ -49,8 +38,8 @@ module Furcate
           keys_match?(deletion, other_modification)
         end
         if deleted_modification
-          return UnresolvedCommitConflict.new(:deletion, deletion, :modification,
-                                              deleted_modification)
+          UnresolvedConflict.new(:deletion, deletion, :modification,
+                                 deleted_modification)
         end
       end
     end

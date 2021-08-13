@@ -2,28 +2,22 @@
 
 module Furcate
   class Stage
+    attr_reader :staged_changes
+
     def initialize
-      @changes = {}
+      @staged_changes = []
     end
 
     def add(leaf)
-      @changes[leaf] = :addition
+      @staged_changes << Change.new(leaf, :addition)
     end
 
     def delete(leaf)
-      @changes[leaf] = :deletion
+      @staged_changes << Change.new(leaf, :deletion)
     end
 
-    def staged_changes
-      @changes
-    end
-
-    def additions
-      @changes.filter{ |_, change_type| change_type == :addition }.keys
-    end
-
-    def deletions
-      @changes.filter{ |_, change_type| change_type == :deletion }.keys
+    def modify(leaf)
+      @staged_changes << Change.new(leaf, :modification)
     end
   end
 end

@@ -2,9 +2,9 @@
 
 module Furcate
   class Furcator
-    def initialize
-      @staged_changes = {}
+    attr_reader :head, :references
 
+    def initialize
       @stage = Stage.new
       @references = { "main" => nil }
       @current_limb_name = "main"
@@ -15,12 +15,16 @@ module Furcate
       @stage.staged_changes
     end
 
-    def stage_addition(furcateable)
-      @stage.add(furcateable)
+    def stage_addition(leaf)
+      @stage.add(leaf)
     end
 
-    def stage_deletion(furcateable)
-      @stage.delete(furcateable)
+    def stage_deletion(leaf)
+      @stage.delete(leaf)
+    end
+
+    def stage_modification(leaf)
+      @stage.modify(leaf)
     end
 
     def make_commit(message = "")
@@ -43,15 +47,5 @@ module Furcate
     def find(&block)
       @head.find(&block)
     end
-
-    attr_reader :head, :references
-
-    # def self.merge_limb_in_to_current(scion, message = "")
-    #   rootstock = @@current_limb_name
-    #   new_commit = Commit.new(message, @@references[rootstock], @@references[scion].tree.clone)
-    #   @@stage = Stage.new
-    #   @@references[@@current_limb_name] = new_commit
-    #   @@head = new_commit
-    # end
   end
 end

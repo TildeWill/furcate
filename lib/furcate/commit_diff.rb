@@ -14,11 +14,11 @@ module Furcate
       additions = commit.leaves.select do |leaf|
         other_commit.no_matching_keys?(leaf)
       end
-      deletions = commit.leaves.select do |leaf|
-        other_commit.any_matching_keys?(leaf)
+      deletions = other_commit.leaves.select do |leaf|
+        commit.no_matching_keys?(leaf)
       end
       modifications = commit.leaves.select do |leaf|
-        other_commit.any_matching_attributes?(leaf)
+        other_commit.any_changed_attributes?(leaf)
       end
 
       CommitDiff.new(additions, deletions, modifications)
@@ -28,8 +28,8 @@ module Furcate
       additions.empty? && deletions.empty? && modifications.empty?
     end
 
-    def conflicts(diff, other_diff)
-      CommitConflicts.calculate_conflicts(diff, other_diff)
-    end
+    # def conflicts(diff, other_diff)
+    #   CommitConflicts.calculate_conflicts(diff, other_diff)
+    # end
   end
 end

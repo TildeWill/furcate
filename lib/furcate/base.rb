@@ -4,7 +4,11 @@ require "active_record"
 
 module Furcate
   class Base
-    attr_reader :id, :type
+    attr_accessor :id, :type, :attributes
+
+    def initialize
+      @attributes = {}
+    end
 
     def create
       Furcate.current_furcator.stage_addition(self)
@@ -15,9 +19,7 @@ module Furcate
     end
 
     def update
-      Furcate.current_furcator.stage_deletion(self)
-      # apply changes to object
-      Furcate.current_furcator.stage_addition(self)
+      Furcate.current_furcator.stage_modification(self)
     end
 
     def self.find(object_id)

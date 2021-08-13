@@ -36,23 +36,38 @@ module Furcate
       !any_matching_keys?(other_leaf)
     end
 
-    def any_matching_attributes?(other_leaf)
-      leaves.any?{ |leaf| leaf.attributes == other_leaf.attributes }
+    def any_changed_attributes?(other_leaf)
+      matching_leaf = leaves.first{ |leaf| leaf.id == other_leaf.id && leaf.type == other_leaf.type }
+      matching_leaf.attributes != other_leaf.attributes
     end
 
     private
 
     def build_new_leaves(leaves, stage)
-      # add the additions from the staged tree
-      stage.additions.each do |change|
-        leaves << change
+      stage.staged_changes.each do |change|
+        case change.change_type
+        when :deletion
+          delete(leaves, change.leaf)
+        when :addition
+          add(leaves, change.leaf)
+        when :modification
+          modify(leaves, change.leaf)
+        end
       end
-
-      stage.deletions.each do |change|
-        leaves.delete(change)
-      end
-
       leaves
+    end
+
+    def delete(leaves, change_leaf)
+      leaves.delete_if { |leaf| leaf.id == change_leaf.id && leaf.type == change_leaf.type }
+    end
+
+    def add(leaves, change_leaf)
+      leaves << DeepClone.clone(change_leaf)
+    end
+
+    def modify(leaves, change_leaf)
+      delete(leaves, change_leaf)
+      add(leaves, change_leaf)
     end
   end
 end
