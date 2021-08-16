@@ -15,7 +15,7 @@ module Furcate
           keys_match?(modification, other_modification) && !attributes_match?(modification, other_modification)
         end
         if modified_modification
-          UnresolvedConflict.new(:modification, modification, :modification, modified_modification)
+          Conflict.new(:modification, modification, :modification, modified_modification)
         end
       end
     end
@@ -26,7 +26,7 @@ module Furcate
           keys_match?(modification, other_deletion)
         end
         if modified_deletion
-          UnresolvedConflict.new(:modification, modification, :deletion,
+          Conflict.new(:modification, modification, :deletion,
                                  modified_deletion)
         end
       end
@@ -38,7 +38,7 @@ module Furcate
           keys_match?(deletion, other_modification)
         end
         if deleted_modification
-          UnresolvedConflict.new(:deletion, deletion, :modification,
+          Conflict.new(:deletion, deletion, :modification,
                                  deleted_modification)
         end
       end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UnresolvedConflict
+class Conflict
   attr_reader :conflict_type, :object, :other_conflict_type, :other_object
 
   def initialize(conflict_type, object, other_conflict_type, other_object)

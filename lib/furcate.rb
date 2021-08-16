@@ -10,7 +10,7 @@ require "furcate/commit_diff"
 require "furcate/deep_clone"
 require "furcate/stage"
 require "furcate/merger"
-require "furcate/unresolved_conflict"
+require "furcate/conflict"
 require "furcate/furcator"
 
 module Furcate

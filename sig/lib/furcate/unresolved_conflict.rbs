@@ -1,5 +1,5 @@
 module Furcate
-  class UnresolvedConflict
+  class Conflict
     attr_reader conflict_type: (:deletion | :modification)
 
     attr_reader object: untyped
