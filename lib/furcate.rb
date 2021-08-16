@@ -2,7 +2,7 @@
 
 require "forwardable"
 require "furcate/version"
-require "furcate/base"
+require "furcate/leaf"
 require "furcate/change"
 require "furcate/commit"
 require "furcate/commit_conflicts"

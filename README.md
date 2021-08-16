@@ -28,7 +28,7 @@ Or install it yourself as:
 ```ruby
 require 'furcate'
 
-class Team < Furcate::Base
+class Team < Furcate::Leaf
 end
 ```
 

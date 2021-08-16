@@ -1,5 +1,5 @@
 module Furcate
-  class Base
+  class Leaf
     attr_reader id: untyped
 
     attr_reader type: untyped
@@ -12,10 +12,10 @@ module Furcate
 
     def update: () -> untyped
 
-    def self.find: (untyped object_id) -> Base
+    def self.find: (untyped object_id) -> Leaf
 
     def sha: () -> untyped
 
-    def diff: (Base other_leaf) -> (:no_match | :changed | :no_change)
+    def diff: (Leaf other_leaf) -> (:no_match | :changed | :no_change)
   end
 end

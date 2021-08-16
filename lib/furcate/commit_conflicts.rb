@@ -14,9 +14,7 @@ module Furcate
         modified_modification = other_diff.modifications.find do |other_modification|
           keys_match?(modification, other_modification) && !attributes_match?(modification, other_modification)
         end
-        if modified_modification
-          Conflict.new(:modification, modification, :modification, modified_modification)
-        end
+        Conflict.new(:modification, modification, :modification, modified_modification) if modified_modification
       end
     end
 
@@ -27,7 +25,7 @@ module Furcate
         end
         if modified_deletion
           Conflict.new(:modification, modification, :deletion,
-                                 modified_deletion)
+                       modified_deletion)
         end
       end
     end
@@ -39,7 +37,7 @@ module Furcate
         end
         if deleted_modification
           Conflict.new(:deletion, deletion, :modification,
-                                 deleted_modification)
+                       deleted_modification)
         end
       end
     end

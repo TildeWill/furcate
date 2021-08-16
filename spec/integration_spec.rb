@@ -7,7 +7,7 @@ RSpec.describe "finding a common ancestor" do
 
   before do
     Furcate.current_furcator = Furcate::Furcator.new
-    leaf_class = Class.new(Furcate::Base) do
+    leaf_class = Class.new(Furcate::Leaf) do
       def initialize(color)
         super()
         attributes[:color] = color

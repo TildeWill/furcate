@@ -3,7 +3,7 @@
 require "active_record"
 
 module Furcate
-  class Base
+  class Leaf
     attr_accessor :id, :type, :attributes
 
     def initialize

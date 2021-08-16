@@ -5,7 +5,7 @@ require "spec_helper"
 RSpec.describe "Comparing two leaves" do
   before do
     Furcate.current_furcator = Furcate::Furcator.new
-    leaf_class = Class.new(Furcate::Base) do
+    leaf_class = Class.new(Furcate::Leaf) do
       attr_reader :color
 
       def initialize(id, type, color)

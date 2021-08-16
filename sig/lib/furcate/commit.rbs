@@ -6,7 +6,7 @@ module Furcate
 
     attr_reader parent_commit: Commit
 
-    attr_reader leaves: Array[Base]
+    attr_reader leaves: Array[Leaf]
 
     def initialize: (String message, Commit parent_commit, Stage stage) -> void
 
@@ -14,18 +14,18 @@ module Furcate
 
     def first_common_ancestor: (Commit scion_head) -> Commit
 
-    def any_matching_keys?: (Base other_leaf) -> bool
+    def any_matching_keys?: (Leaf other_leaf) -> bool
 
-    def no_matching_keys?: (Base other_leaf) -> bool
+    def no_matching_keys?: (Leaf other_leaf) -> bool
 
-    def any_changed_attributes?: (Base other_leaf) -> bool
+    def any_changed_attributes?: (Leaf other_leaf) -> bool
 
     private
 
     def find_ancestor: (Commit scion_head, Commit scion_commit, Commit rootstock_head) -> Commit
-    def build_new_leaves: (Array[Base] leaves, Stage stage) -> Array[Base]
-    def add: (Array[Base] leaves, Base change_leaf) -> void
-    def delete: (Array[Base] leaves, Base change_leaf) -> void
-    def modify: (Array[Base] leaves, Base change_leaf) -> void
+    def build_new_leaves: (Array[Leaf] leaves, Stage stage) -> Array[Leaf]
+    def add: (Array[Leaf] leaves, Leaf change_leaf) -> void
+    def delete: (Array[Leaf] leaves, Leaf change_leaf) -> void
+    def modify: (Array[Leaf] leaves, Leaf change_leaf) -> void
   end
 end

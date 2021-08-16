@@ -7,7 +7,7 @@ RSpec.describe Furcate do
 
   before do
     Furcate.current_furcator = Furcate::Furcator.new
-    leaf_class = Class.new(Furcate::Base)
+    leaf_class = Class.new(Furcate::Leaf)
     stub_const("Leaf", leaf_class)
   end
 

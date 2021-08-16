@@ -8,8 +8,8 @@ module Furcate
 
     def self.deleted_in_diff_and_modified_in_other_diff: (CommitDiff diff, CommitDiff other_diff) -> Array[(Conflict|nil)]
 
-    def self.keys_match?: (Base leaf, Base other_leaf) -> bool
+    def self.keys_match?: (Leaf leaf, Leaf other_leaf) -> bool
 
-    def self.attributes_match?: (Base leaf, Base other_leaf) -> bool
+    def self.attributes_match?: (Leaf leaf, Leaf other_leaf) -> bool
   end
 end

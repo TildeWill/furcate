@@ -1,10 +1,10 @@
 module Furcate
   class CommitDiff
-    attr_reader additions: Array[Base]
+    attr_reader additions: Array[Leaf]
 
-    attr_reader deletions: Array[Base]
+    attr_reader deletions: Array[Leaf]
 
-    attr_reader modifications: Array[Base]
+    attr_reader modifications: Array[Leaf]
 
     def initialize: (untyped additions, untyped deletions, untyped modifications) -> void
 
