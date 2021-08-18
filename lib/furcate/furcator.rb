@@ -45,6 +45,8 @@ module Furcate
       @current_limb_name = limb_name
     end
 
-    def_delegator :@head, :find
+    def find(furcate_id)
+      @head.find(furcate_id)
+    end
   end
 end

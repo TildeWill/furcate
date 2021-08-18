@@ -7,12 +7,12 @@ gemspec
 
 gem "rake"
 
-gem "rspec"
-
-gem "rubocop"
-
-gem "steep"
-
-gem "gem-release"
-
-gem "rails", require: "rails"
+group :development, :test do
+  gem "gem-release"
+  gem "rails", require: "rails"
+  gem "rspec"
+  gem "rspec-rails"
+  gem "rubocop"
+  gem "sqlite3"
+  gem "steep"
+end

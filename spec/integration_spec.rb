@@ -7,16 +7,7 @@ RSpec.describe "finding a common ancestor" do
 
   before do
     Furcate.current_furcator = Furcate::Furcator.new
-    leaf_class = Class.new(Furcate::Leaf) do
-      def initialize(color)
-        super()
-        attributes[:color] = color
-      end
-
-      def color=(color)
-        attributes[:color] = color
-      end
-    end
+    leaf_class = Team
     stub_const("Leaf", leaf_class)
   end
 
@@ -26,26 +17,20 @@ RSpec.describe "finding a common ancestor" do
     #   \    F    (topic2)
     #    D -- E   (topic1)
 
-    leaf = Leaf.new("green")
-    leaf.id = 1111
-    leaf.type = "leaf"
-    leaf.create
+    leaf = Leaf.create(color: "green")
     @commit_a = furcator.make_commit("a")
 
     furcator.create_and_switch_to_limb("topic1")
 
-    leaf.color = "dark green"
-    leaf.update
+    leaf.update(color: "dark green")
     @commit_d = furcator.make_commit("d")
 
-    leaf.color = "erie green"
-    leaf.update
+    leaf.update(color: "erie green")
     @commit_e = furcator.make_commit("e")
 
     furcator.switch_to_limb("main")
 
-    leaf.color = "brownish green"
-    leaf.update
+    leaf.update(color: "brownish green")
     @commit_b = furcator.make_commit("b")
 
     furcator.create_and_switch_to_limb("topic2")

@@ -1,9 +1,18 @@
 # frozen_string_literal: true
 
-require "rails"
+require "bundler/setup"
+require "active_record"
+
+ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
+# ActiveRecord::Base.logger = Logger.new STDOUT
+
+load "#{File.dirname(__FILE__)}/dummy/db/schema.rb"
+load "#{File.dirname(__FILE__)}/dummy/app/models/team.rb"
+load "#{File.dirname(__FILE__)}/dummy/app/models/person.rb"
+
 require "furcate"
-# Combustion.path = 'spec/dummy'
-# Combustion.initialize! :active_record
+
+Bundler.setup(:default, :development)
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

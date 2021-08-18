@@ -1,21 +1,27 @@
 module Furcate
   class Leaf
-    attr_reader id: untyped
+    extend Forwardable
 
-    attr_reader type: untyped
+    attr_reader id: String
+
+    attr_reader type: String
 
     attr_reader attributes: untyped
 
-    def create: () -> untyped
+    def record_class: () -> untyped
+
+    def self.inherited: (Module) -> void
+
+    def initialize: (?::Hash[Symbol, untyped] attributes) -> void
 
     def delete: () -> untyped
 
-    def update: () -> untyped
-
-    def self.find: (untyped object_id) -> Leaf
-
-    def sha: () -> untyped
+    def update: (?::Hash[Symbol, untyped] attributes) -> untyped
 
     def diff: (Leaf other_leaf) -> (:no_match | :changed | :no_change)
+
+    def self.create: (?::Hash[Symbol, untyped] attributes) -> Leaf
+
+    def self.find: (String furcate_id) -> Leaf?
   end
 end

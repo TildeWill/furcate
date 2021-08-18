@@ -10,7 +10,7 @@ module Furcate
 
     def initialize: (String message, Commit parent_commit, Stage stage) -> void
 
-    # def find: () { () -> untyped } -> untyped
+    def find: (String furcate_id) -> Leaf?
 
     def first_common_ancestor: (Commit scion_head) -> Commit
 

@@ -14,7 +14,9 @@ module Furcate
       @leaves.freeze
     end
 
-    def_delegator :@leaves, :find
+    def find(furcate_id)
+      leaves.find{ |leaf| leaf.id == furcate_id }
+    end
 
     def first_common_ancestor(scion_head)
       find_ancestor(scion_head, scion_head, self)

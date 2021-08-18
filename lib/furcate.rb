@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require "forwardable"
+require "active_record"
+
 require "furcate/version"
 require "furcate/leaf"
 require "furcate/change"
@@ -21,4 +23,6 @@ module Furcate
   def self.current_furcator
     @current_furcator
   end
+
+  class AnonymousClassNotSupported < StandardError; end
 end

@@ -5,22 +5,16 @@ require "spec_helper"
 RSpec.describe "Comparing two leaves" do
   before do
     Furcate.current_furcator = Furcate::Furcator.new
-    leaf_class = Class.new(Furcate::Leaf) do
-      attr_reader :color
-
-      def initialize(id, type, color)
-        @id = id
-        @type = type
-        @color = color
-      end
-    end
+    leaf_class = Team
     stub_const("Leaf", leaf_class)
+    different_leaf_class = Person
+    stub_const("DifferentLeaf", different_leaf_class)
   end
 
   context "when the two leaves have the same id, same type, and same data" do
     it "returns 'no change'" do
-      leaf = Leaf.new(1, :leaf, "green")
-      other_leaf = Leaf.new(1, :leaf, "green")
+      leaf = Leaf.new(furcate_id: 1, color: "green")
+      other_leaf = Leaf.new(furcate_id: 1, color: "green")
 
       expect(leaf.diff(other_leaf)).to equal(:no_change)
     end
@@ -28,8 +22,8 @@ RSpec.describe "Comparing two leaves" do
 
   context "when the two leaves have the same id, same type, and different data" do
     it "returns 'no change'" do
-      leaf = Leaf.new(1, :leaf, "green")
-      other_leaf = Leaf.new(1, :leaf, "brown")
+      leaf = Leaf.new(furcate_id: 1, color: "green")
+      other_leaf = Leaf.new(furcate_id: 1, color: "brown")
 
       expect(leaf.diff(other_leaf)).to equal(:changed)
     end
@@ -37,8 +31,8 @@ RSpec.describe "Comparing two leaves" do
 
   context "when the two leaves have the different ids" do
     it "returns 'no change'" do
-      leaf = Leaf.new(1, :leaf, "green")
-      other_leaf = Leaf.new(2, :leaf, "green")
+      leaf = Leaf.new(furcate_id: 1, color: "green")
+      other_leaf = Leaf.new(furcate_id: 2, color: "green")
 
       expect(leaf.diff(other_leaf)).to equal(:no_match)
     end
@@ -46,8 +40,8 @@ RSpec.describe "Comparing two leaves" do
 
   context "when the two leaves have the different types" do
     it "returns 'no change'" do
-      leaf = Leaf.new(1, :leaf, "green")
-      other_leaf = Leaf.new(1, :needle, "green")
+      leaf = Leaf.new(furcate_id: 1, color: "green")
+      other_leaf = DifferentLeaf.new(furcate_id: 1, color: "green")
 
       expect(leaf.diff(other_leaf)).to equal(:no_match)
     end

@@ -4,30 +4,63 @@ require "active_record"
 
 module Furcate
   class Leaf
-    attr_accessor :id, :type, :attributes
+    extend Forwardable
 
-    def initialize
-      @attributes = {}
+    def_delegator :@record, :attributes
+
+    def self.inherited(klass)
+      raise Furcate::AnonymousClassNotSupported if (namespaced_name = klass.name).nil?
+
+      class_parts = namespaced_name.split("::")
+      class_parts << "Furcate#{class_parts.pop}"
+      record_class_string = class_parts.join("::")
+      record_class = Class.new(ActiveRecord::Base)
+      method_string = <<-RUBY
+        def self.name
+          "#{record_class_string}"
+        end
+      RUBY
+      record_class.class_eval(method_string)
+
+      klass.define_method :record_class do
+        record_class
+      end
+
+      Object.const_set(record_class_string, record_class)
+      super
     end
 
-    def create
-      Furcate.current_furcator.stage_addition(self)
+    def type
+      record_class.name
+    end
+
+    def id
+      @record.furcate_id
+    end
+
+    def initialize(attributes = {})
+      @record = record_class.new(attributes)
+    end
+
+    def self.create(attributes = {})
+      leaf = new(attributes)
+      leaf.instance_variable_get("@record").save
+      Furcate.current_furcator.stage_addition(leaf)
+      leaf
     end
 
     def delete
       Furcate.current_furcator.stage_deletion(self)
     end
 
-    def update
+    def update(attributes = {})
+      @record = record_class.new(self.attributes.except("id").merge(attributes))
+      @record.save
       Furcate.current_furcator.stage_modification(self)
     end
 
-    def self.find(object_id)
-      Furcate.current_furcator.find{ |furcateable| furcateable.object_id == object_id }
-    end
-
-    def sha
-      p Marshal.dump(self)
+    def self.find(furcate_id)
+      Furcate.current_furcator.find(furcate_id)
     end
 
     def diff(other_leaf)
