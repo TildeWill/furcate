@@ -45,22 +45,22 @@ RSpec.describe "finding a common ancestor" do
   end
 
   it "says there's no conflict when only one has made changes" do
-    conflicts = Furcate::Merger.check_for_conflicts(@commit_a, @commit_e)
+    conflicts = Furcate::Merger.check_for_conflicts("main", "main")
     expect(conflicts).to be_empty
   end
 
   it "says there's a conflict when both have made changes" do
-    conflicts = Furcate::Merger.check_for_conflicts(@commit_b, @commit_e)
+    conflicts = Furcate::Merger.check_for_conflicts("main", "topic1")
     expect(conflicts).to be_present
   end
 
   it "says there's no conflict if both deleted" do
-    conflicts = Furcate::Merger.check_for_conflicts(@commit_f, @commit_c)
+    conflicts = Furcate::Merger.check_for_conflicts("main", "topic2")
     expect(conflicts).to be_empty
   end
 
   it "says there's a conflict when one deletes and the other made changes" do
-    conflicts = Furcate::Merger.check_for_conflicts(@commit_f, @commit_e)
+    conflicts = Furcate::Merger.check_for_conflicts("topic2", "topic1")
     expect(conflicts).to be_present
   end
 end
