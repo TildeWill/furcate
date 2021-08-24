@@ -2,6 +2,7 @@
 
 require "bundler/setup"
 require "active_record"
+require "require_all"
 
 ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"
 # ActiveRecord::Base.logger = Logger.new STDOUT
@@ -13,6 +14,7 @@ load "#{File.dirname(__FILE__)}/dummy/app/models/person.rb"
 require "furcate"
 
 Bundler.setup(:default, :development)
+require_all "spec/support"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -24,4 +26,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.include TreeHelpers
 end

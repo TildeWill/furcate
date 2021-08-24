@@ -13,8 +13,6 @@ RSpec.describe Furcate do
 
   it "clears the staged changes after a commit" do
     Leaf.create
-    expect(furcate.staged_changes).not_to be_empty
-    furcate.make_commit
     expect(furcate.staged_changes).to be_empty
   end
 end

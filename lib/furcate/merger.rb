@@ -5,7 +5,7 @@ module Furcate
     def self.check_for_conflicts(rootstock_name, scion_name)
       rootstock = Furcate.current_furcator.references[rootstock_name]
       scion = Furcate.current_furcator.references[scion_name]
-      common_ancestor = rootstock.first_common_ancestor(scion)
+      common_ancestor = Furcate::Ancestor.first_common(rootstock, scion)
       root_diff = CommitDiff.diff(rootstock, common_ancestor)
       scion_diff = CommitDiff.diff(scion, common_ancestor)
 

@@ -45,18 +45,18 @@ module Furcate
     def self.create(attributes = {})
       leaf = new(attributes)
       leaf.instance_variable_get("@record").save
-      Furcate.current_furcator.stage_addition(leaf)
+      Furcate.current_furcator.commit_addition(leaf)
       leaf
     end
 
     def delete
-      Furcate.current_furcator.stage_deletion(self)
+      Furcate.current_furcator.commit_deletion(self)
     end
 
     def update(attributes = {})
       @record = record_class.new(self.attributes.except("id").merge(attributes))
       @record.save
-      Furcate.current_furcator.stage_modification(self)
+      Furcate.current_furcator.commit_modification(self)
     end
 
     def self.find(furcate_id)

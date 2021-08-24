@@ -18,10 +18,6 @@ module Furcate
       leaves.find{ |leaf| leaf.id == furcate_id }
     end
 
-    def first_common_ancestor(scion_head)
-      find_ancestor(scion_head, scion_head, self)
-    end
-
     def any_matching_keys?(other_leaf)
       leaves.any?{ |leaf| leaf.id == other_leaf.id && leaf.type == other_leaf.type }
     end
@@ -36,18 +32,6 @@ module Furcate
     end
 
     private
-
-    def find_ancestor(scion_head, scion_commit, rootstock_head)
-      return rootstock_head if rootstock_head == scion_commit
-      return scion_commit if rootstock_head.parent_commit == scion_commit
-
-      if scion_commit.parent_commit.nil?
-        find_ancestor(scion_head.parent_commit || scion_head, scion_head.parent_commit || scion_head,
-                      rootstock_head.parent_commit)
-      else
-        find_ancestor(scion_head, scion_commit.parent_commit, rootstock_head)
-      end
-    end
 
     def build_new_leaves(leaves, stage)
       stage.staged_changes.each do |change|

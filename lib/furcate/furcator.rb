@@ -8,7 +8,7 @@ module Furcate
 
     def initialize
       @stage = Stage.new
-      @references = { "main" => nil }
+      @references = { "main" => NullCommit }
       @current_limb_name = "main"
     end
 
@@ -16,23 +16,19 @@ module Furcate
       @stage.staged_changes
     end
 
-    def stage_addition(leaf)
+    def commit_addition(leaf)
       @stage.add(leaf)
+      make_commit
     end
 
-    def stage_deletion(leaf)
+    def commit_deletion(leaf)
       @stage.delete(leaf)
+      make_commit
     end
 
-    def stage_modification(leaf)
+    def commit_modification(leaf)
       @stage.modify(leaf)
-    end
-
-    def make_commit(message = "")
-      new_commit = Commit.new(message, @head, @stage)
-      @stage = Stage.new
-      @references[@current_limb_name] = new_commit
-      @head = new_commit
+      make_commit
     end
 
     def create_and_switch_to_limb(limb_name)
@@ -45,8 +41,21 @@ module Furcate
       @current_limb_name = limb_name
     end
 
+    def add_reference(reference_name)
+      @references[reference_name] = @head
+    end
+
     def find(furcate_id)
       @head.find(furcate_id)
+    end
+
+    private
+
+    def make_commit(message = "")
+      new_commit = Commit.new(message, @head, @stage)
+      @stage = Stage.new
+      @references[@current_limb_name] = new_commit
+      @head = new_commit
     end
   end
 end
