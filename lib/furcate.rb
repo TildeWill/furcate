@@ -27,4 +27,8 @@ module Furcate
   end
 
   class AnonymousClassNotSupported < StandardError; end
+  private_constant :Commit
+  private_constant :DeepClone
+  private_constant :NullCommit
+  private_constant :Stage
 end

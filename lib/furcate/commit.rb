@@ -4,10 +4,9 @@ module Furcate
   class Commit
     extend Forwardable
 
-    attr_reader :message, :parent_commit, :leaves
+    attr_reader :parent_commit, :leaves
 
-    def initialize(message, parent_commit, stage)
-      @message = message
+    def initialize(parent_commit, stage)
       @parent_commit = parent_commit
       previous_leaves = parent_commit ? parent_commit.leaves : []
       @leaves = build_new_leaves(Array.new(previous_leaves), stage)

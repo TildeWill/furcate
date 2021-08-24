@@ -24,6 +24,6 @@ module Furcate
 
     private
 
-    def make_commit: (?::String message) -> untyped
+    def make_commit: () -> Commit
   end
 end

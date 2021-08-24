@@ -51,8 +51,8 @@ module Furcate
 
     private
 
-    def make_commit(message = "")
-      new_commit = Commit.new(message, @head, @stage)
+    def make_commit
+      new_commit = Commit.new(@head, @stage)
       @stage = Stage.new
       @references[@current_limb_name] = new_commit
       @head = new_commit
