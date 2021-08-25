@@ -33,20 +33,13 @@ end
 ```
 
 ```ruby
-team = Team.new
-team.create("The A Team")
+team = Team.create("The A Team") 
 
-#commit to default limb named "main"
-Furcate.commit("First commit")
-
-#switch to a new limb
+#switch to a new limb and remove the team
 Furcate.create_and_switch_to_limb("cleanup branch")
-
-# remove the team
 team.delete
-Furcate.commit("Removes the team")
 
-#switch back to the main limb
+#switch back to the main limb, team is restored
 Furcate.switch_to_limb("main")
 ```
 
