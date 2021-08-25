@@ -11,18 +11,6 @@ module Furcate
       @current_limb_name = "main"
     end
 
-    def commit_addition(leaf)
-      make_commit(Change.new(leaf, :addition))
-    end
-
-    def commit_deletion(leaf)
-      make_commit(Change.new(leaf, :deletion))
-    end
-
-    def commit_modification(leaf)
-      make_commit(Change.new(leaf, :modification))
-    end
-
     def create_and_switch_to_limb(limb_name)
       @references[limb_name] = @head
       @current_limb_name = limb_name
@@ -40,8 +28,6 @@ module Furcate
     def find(furcate_id)
       @head.find(furcate_id)
     end
-
-    private
 
     def make_commit(change)
       new_commit = Commit.new(@head, change)

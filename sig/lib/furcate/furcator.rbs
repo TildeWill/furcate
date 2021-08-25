@@ -4,12 +4,6 @@ module Furcate
 
     def initialize: () -> void
 
-    def commit_addition: (Leaf leaf) -> untyped
-
-    def commit_deletion: (Leaf leaf) -> untyped
-
-    def commit_modification: (Leaf leaf) -> untyped
-
     def create_and_switch_to_limb: (String limb_name) -> void
 
     def switch_to_limb: (String limb_name) -> void
@@ -19,8 +13,6 @@ module Furcate
     attr_reader head: Commit
 
     attr_reader references: Hash[String, Commit]
-
-    private
 
     def make_commit: (Change) -> Commit
   end

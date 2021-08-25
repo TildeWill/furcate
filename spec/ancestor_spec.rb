@@ -36,8 +36,8 @@ RSpec.describe "finding a common ancestor" do
     end
   end
 
-  context "when there are two commits that share a common middle branch" do
-    it "returns the one that was branched from" do
+  context "when there are two commits that share a common ancestor limb" do
+    it "returns the commit that was branched from (aka 'the crotch')" do
       expect(Furcate::Ancestor.first_common(@commit_f, @commit_e)).to equal(@commit_a)
       expect(Furcate::Ancestor.first_common(@commit_e, @commit_f)).to equal(@commit_a)
     end
