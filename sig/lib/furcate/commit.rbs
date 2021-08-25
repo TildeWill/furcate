@@ -6,7 +6,7 @@ module Furcate
 
     attr_reader leaves: Array[Leaf]
 
-    def initialize: (Commit parent_commit, Stage stage) -> void
+    def initialize: (Commit parent_commit, Change change) -> void
 
     def find: (String furcate_id) -> Leaf?
 
@@ -21,7 +21,7 @@ module Furcate
     private
 
     def find_ancestor: (Commit scion_head, Commit scion_commit, Commit rootstock_head) -> Commit
-    def build_new_leaves: (Array[Leaf] leaves, Stage stage) -> Array[Leaf]
+    def build_new_leaves: (Array[Leaf] leaves, Change change) -> Array[Leaf]
     def add: (Array[Leaf] leaves, Leaf change_leaf) -> void
     def delete: (Array[Leaf] leaves, Leaf change_leaf) -> void
     def modify: (Array[Leaf] leaves, Leaf change_leaf) -> void

@@ -11,7 +11,6 @@ require "furcate/commit"
 require "furcate/commit_conflicts"
 require "furcate/commit_diff"
 require "furcate/deep_clone"
-require "furcate/stage"
 require "furcate/merger"
 require "furcate/null_commit"
 require "furcate/conflict"
@@ -30,5 +29,4 @@ module Furcate
   private_constant :Commit
   private_constant :DeepClone
   private_constant :NullCommit
-  private_constant :Stage
 end

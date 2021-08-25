@@ -7,28 +7,20 @@ module Furcate
     attr_reader :head, :references
 
     def initialize
-      @stage = Stage.new
       @references = { "main" => NullCommit }
       @current_limb_name = "main"
     end
 
-    def staged_changes
-      @stage.staged_changes
-    end
-
     def commit_addition(leaf)
-      @stage.add(leaf)
-      make_commit
+      make_commit(Change.new(leaf, :addition))
     end
 
     def commit_deletion(leaf)
-      @stage.delete(leaf)
-      make_commit
+      make_commit(Change.new(leaf, :deletion))
     end
 
     def commit_modification(leaf)
-      @stage.modify(leaf)
-      make_commit
+      make_commit(Change.new(leaf, :modification))
     end
 
     def create_and_switch_to_limb(limb_name)
@@ -51,9 +43,8 @@ module Furcate
 
     private
 
-    def make_commit
-      new_commit = Commit.new(@head, @stage)
-      @stage = Stage.new
+    def make_commit(change)
+      new_commit = Commit.new(@head, change)
       @references[@current_limb_name] = new_commit
       @head = new_commit
     end

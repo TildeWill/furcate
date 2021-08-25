@@ -4,8 +4,6 @@ module Furcate
 
     def initialize: () -> void
 
-    def staged_changes: () -> Stage
-
     def commit_addition: (Leaf leaf) -> untyped
 
     def commit_deletion: (Leaf leaf) -> untyped
@@ -24,6 +22,6 @@ module Furcate
 
     private
 
-    def make_commit: () -> Commit
+    def make_commit: (Change) -> Commit
   end
 end

@@ -6,10 +6,10 @@ module Furcate
 
     attr_reader :parent_commit, :leaves
 
-    def initialize(parent_commit, stage)
+    def initialize(parent_commit, change)
       @parent_commit = parent_commit
       previous_leaves = parent_commit ? parent_commit.leaves : []
-      @leaves = build_new_leaves(Array.new(previous_leaves), stage)
+      @leaves = build_new_leaves(Array.new(previous_leaves), change)
       @leaves.freeze
     end
 
@@ -32,16 +32,14 @@ module Furcate
 
     private
 
-    def build_new_leaves(leaves, stage)
-      stage.staged_changes.each do |change|
-        case change.change_type
-        when :deletion
-          delete(leaves, change.leaf)
-        when :addition
-          add(leaves, change.leaf)
-        when :modification
-          modify(leaves, change.leaf)
-        end
+    def build_new_leaves(leaves, change)
+      case change.change_type
+      when :deletion
+        delete(leaves, change.leaf)
+      when :addition
+        add(leaves, change.leaf)
+      when :modification
+        modify(leaves, change.leaf)
       end
       leaves
     end
