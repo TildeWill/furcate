@@ -12,26 +12,26 @@ module Furcate
     end
 
     def create_and_switch_to_limb(limb_name)
-      @references[limb_name] = @head
+      references[limb_name] = head
       @current_limb_name = limb_name
     end
 
     def switch_to_limb(limb_name)
-      @head = @references[limb_name]
+      @head = references[limb_name]
       @current_limb_name = limb_name
     end
 
     def add_reference(reference_name)
-      @references[reference_name] = @head
+      references[reference_name] = head
     end
 
     def find(furcate_id)
-      @head.find(furcate_id)
+      head.find(furcate_id)
     end
 
     def make_commit(change)
-      new_commit = Commit.new(@head, change)
-      @references[@current_limb_name] = new_commit
+      new_commit = Commit.new(head, change)
+      references[@current_limb_name] = new_commit
       @head = new_commit
     end
   end
