@@ -1,0 +1,12 @@
+module Furcate
+  class LeafBuilder
+    def self.graft: (Commit parent_commit, Change change) -> Array[Leaf]
+
+    private
+
+    def self.build_new_leaves: (Array[Leaf] leaves, Change change) -> Array[Leaf]
+    def self.add: (Array[Leaf] leaves, Leaf change_leaf) -> void
+    def self.delete: (Array[Leaf] leaves, Leaf change_leaf) -> void
+    def self.modify: (Array[Leaf] leaves, Leaf change_leaf) -> void
+  end
+end

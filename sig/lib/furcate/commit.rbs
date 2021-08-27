@@ -17,13 +17,5 @@ module Furcate
     def no_matching_keys?: (Leaf other_leaf) -> bool
 
     def any_changed_attributes?: (Leaf other_leaf) -> bool
-
-    private
-
-    def find_ancestor: (Commit scion_head, Commit scion_commit, Commit rootstock_head) -> Commit
-    def build_new_leaves: (Array[Leaf] leaves, Change change) -> Array[Leaf]
-    def add: (Array[Leaf] leaves, Leaf change_leaf) -> void
-    def delete: (Array[Leaf] leaves, Leaf change_leaf) -> void
-    def modify: (Array[Leaf] leaves, Leaf change_leaf) -> void
   end
 end

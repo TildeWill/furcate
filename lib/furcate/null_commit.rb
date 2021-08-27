@@ -2,5 +2,8 @@
 
 module Furcate
   class NullCommit < Commit
+    def leaves
+      []
+    end
   end
 end

@@ -8,9 +8,7 @@ module Furcate
 
     def initialize(parent_commit, change)
       @parent_commit = parent_commit
-      previous_leaves = parent_commit ? parent_commit.leaves : []
-      @leaves = build_new_leaves(Array.new(previous_leaves), change)
-      @leaves.freeze
+      @leaves = LeafBuilder.graft(parent_commit, change)
     end
 
     def find(furcate_id)
@@ -28,33 +26,6 @@ module Furcate
     def any_changed_attributes?(other_leaf)
       matching_leaf = leaves.find{ |leaf| leaf.id == other_leaf.id && leaf.type == other_leaf.type }
       matching_leaf && matching_leaf.attributes != other_leaf.attributes
-    end
-
-    private
-
-    def build_new_leaves(leaves, change)
-      case change.change_type
-      when :deletion
-        delete(leaves, change.leaf)
-      when :addition
-        add(leaves, change.leaf)
-      when :modification
-        modify(leaves, change.leaf)
-      end
-      leaves
-    end
-
-    def delete(leaves, change_leaf)
-      leaves.delete_if { |leaf| leaf.id == change_leaf.id && leaf.type == change_leaf.type }
-    end
-
-    def add(leaves, change_leaf)
-      leaves << DeepClone.clone(change_leaf)
-    end
-
-    def modify(leaves, change_leaf)
-      delete(leaves, change_leaf)
-      add(leaves, change_leaf)
     end
   end
 end
