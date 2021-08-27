@@ -30,7 +30,8 @@ module Furcate
     end
 
     def make_commit(change)
-      new_commit = Commit.new(parent_commit: head, change: change)
+      leaves = LeafBuilder.graft(head, change)
+      new_commit = Commit.new(parent_commit: head, leaves: leaves)
       references[@current_limb_name] = new_commit
       @head = new_commit
     end

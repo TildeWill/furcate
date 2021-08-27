@@ -8,7 +8,7 @@ module Furcate
 
     def initialize(attributes)
       @parent_commit = attributes[:parent_commit]
-      @leaves = LeafBuilder.graft(parent_commit, attributes[:change])
+      @leaves = attributes[:leaves]
       super()
     end
 
