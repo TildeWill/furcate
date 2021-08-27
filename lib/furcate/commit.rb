@@ -4,12 +4,13 @@ module Furcate
   class Commit < ActiveRecord::Base
     extend Forwardable
 
-    attr_reader :parent_commit, :leaves
+    attr_reader :leaves
+
+    belongs_to :parent_commit, class_name: "Furcate::Commit"
 
     def initialize(attributes)
-      @parent_commit = attributes[:parent_commit]
-      @leaves = attributes[:leaves]
-      super()
+      @leaves = attributes.delete(:leaves)
+      super
     end
 
     def find(furcate_id)

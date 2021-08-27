@@ -9,7 +9,7 @@ gem "rake"
 
 group :development, :test do
   gem "gem-release"
-  gem "rails", require: "rails"
+  # gem "rails", require: "rails"
   gem "require_all"
   gem "rspec"
   gem "rspec-rails"

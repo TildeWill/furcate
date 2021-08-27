@@ -14,6 +14,6 @@ ActiveRecord::Schema.define do
   end
 
   create_table :commits, force: true do |t|
-    # t.belongs_to(:parent_commit, foreign_key: { to_table: :commit })
+    t.references :parent_commit, foreign_key: { to_table: :commits }
   end
 end

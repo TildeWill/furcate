@@ -1,5 +1,5 @@
 module Furcate
-  class Commit
+  class Commit < ActiveRecord::Base
     extend Forwardable
 
     attr_reader parent_commit: Commit
