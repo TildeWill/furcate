@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 module Furcate
-  class Commit
+  class Commit < ActiveRecord::Base
     extend Forwardable
 
     attr_reader :parent_commit, :leaves
 
-    def initialize(parent_commit, change)
-      @parent_commit = parent_commit
-      @leaves = LeafBuilder.graft(parent_commit, change)
+    def initialize(attributes)
+      @parent_commit = attributes[:parent_commit]
+      @leaves = LeafBuilder.graft(parent_commit, attributes[:change])
+      super()
     end
 
     def find(furcate_id)

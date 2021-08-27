@@ -30,7 +30,7 @@ module Furcate
     end
 
     def make_commit(change)
-      new_commit = Commit.new(head, change)
+      new_commit = Commit.new(parent_commit: head, change: change)
       references[@current_limb_name] = new_commit
       @head = new_commit
     end

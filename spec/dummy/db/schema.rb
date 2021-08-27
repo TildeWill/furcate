@@ -12,4 +12,8 @@ ActiveRecord::Schema.define do
     t.string :furcate_id
     t.string :color
   end
+
+  create_table :commits, force: true do |t|
+    # t.belongs_to(:parent_commit, foreign_key: { to_table: :commit })
+  end
 end
