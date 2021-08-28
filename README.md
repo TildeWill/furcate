@@ -1,11 +1,22 @@
 # furcate
-[ verb fur-keyt ] _to form a fork; branch._
+[ _verb_ fur-keyt ] _to form a fork; branch._
 
 When you want to enable your users to "branch" and "merge" data the same way you 
 branch and merge code, then **furcate** is for you. It replaces `ActiveRecord::Base` 
 on your models, storing each change to the model in a separate row in the database. 
 Changes are recorded as commits. Together they form snapshots of the data your users
 interact with. 
+
+Gems like [paper_trail](https://github.com/paper-trail-gem/paper_trail) and 
+[audited](https://github.com/collectiveidea/audited) don't offer branching and merging. And purpose-built datastore 
+tools like [TerminusDB](https://terminusdb.com/) and [Dolt](https://www.dolthub.com/) don't have production-ready 
+SaaS offerings, and also seem to want collaboration to happen at the data level, rather than the app level, sending us
+straight back to the early 2000's when the database was the API and business operation was closely
+coupled to the schema making changes impossible.
+
+Furcate operates at the software level, using off-the-shelf, well known relational databases to back
+the git-like versioning of data along with branching and merging that so many collaborative apps need
+in today's internet. 
 
 ## Installation
 
