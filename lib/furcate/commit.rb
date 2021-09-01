@@ -3,14 +3,18 @@
 module Furcate
   class Commit < ActiveRecord::Base
     extend Forwardable
-
-    attr_reader :leaves
+    has_many :trees
+    has_many :furcate_teams, through: :trees
 
     belongs_to :parent_commit, class_name: "Furcate::Commit"
 
     def initialize(attributes)
-      @leaves = attributes.delete(:leaves)
+      attributes[:furcate_teams] = attributes.delete(:leaves).map{|leaf| leaf.instance_variable_get(:@record)}
       super
+    end
+
+    def leaves
+      furcate_teams.map{|l| Team.new(l.attributes)}
     end
 
     def find(furcate_id)

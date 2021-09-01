@@ -10,11 +10,12 @@ require "furcate/change"
 require "furcate/commit"
 require "furcate/commit_conflicts"
 require "furcate/commit_diff"
+require "furcate/conflict"
 require "furcate/deep_clone"
 require "furcate/leaf_builder"
 require "furcate/merger"
 require "furcate/null_commit"
-require "furcate/conflict"
+require "furcate/tree"
 require "furcate/furcator"
 
 module Furcate

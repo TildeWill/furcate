@@ -16,4 +16,9 @@ ActiveRecord::Schema.define do
   create_table :commits, force: true do |t|
     t.references :parent_commit, foreign_key: { to_table: :commits }
   end
+
+  create_table :trees, force: true do |t|
+    t.belongs_to :commit
+    t.belongs_to :furcate_team
+  end
 end
