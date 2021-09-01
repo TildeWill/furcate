@@ -1,7 +1,0 @@
-module Furcate
-  class Ancestor
-    def self.first_common: (Commit rootstock, Commit scion) -> Commit
-
-    def self.find_ancestor: (Commit scion_head, Commit scion_commit, Commit rootstock_head) -> Commit
-  end
-end

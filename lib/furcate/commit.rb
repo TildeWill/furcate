@@ -4,17 +4,17 @@ module Furcate
   class Commit < ActiveRecord::Base
     extend Forwardable
     has_many :trees
-    has_many :furcate_teams, through: :trees
+    has_many :teams, through: :trees
 
     belongs_to :parent_commit, class_name: "Furcate::Commit"
 
     def initialize(attributes)
-      attributes[:furcate_teams] = attributes.delete(:leaves).map{|leaf| leaf.instance_variable_get(:@record)}
+      attributes[:teams] = attributes.delete(:leaves)
       super
     end
 
     def leaves
-      furcate_teams.map{|l| Team.new(l.attributes)}
+      teams
     end
 
     def find(furcate_id)

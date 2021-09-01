@@ -3,12 +3,12 @@
 ActiveRecord::Schema.define do
   # Set up any tables you need to exist for your test suite that don't belong
   # in migrations.
-  create_table :furcate_people, force: true do |t|
+  create_table :people, force: true do |t|
     t.string :furcate_id
     t.string :color
   end
 
-  create_table :furcate_teams, force: true do |t|
+  create_table :teams, force: true do |t|
     t.string :furcate_id
     t.string :color
   end
@@ -19,6 +19,6 @@ ActiveRecord::Schema.define do
 
   create_table :trees, force: true do |t|
     t.belongs_to :commit
-    t.belongs_to :furcate_team
+    t.belongs_to :team
   end
 end

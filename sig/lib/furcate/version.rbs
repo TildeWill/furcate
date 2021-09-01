@@ -1,3 +1,0 @@
-module Furcate
-  VERSION: ::String
-end

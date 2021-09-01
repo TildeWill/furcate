@@ -1,9 +1,0 @@
-module Furcate
-  class Change
-    attr_accessor change_type: (:addition | :deletion | :modification)
-
-    attr_accessor leaf: Leaf
-
-    def initialize: (Leaf leaf, (:addition | :deletion | :modification) change_type) -> void
-  end
-end

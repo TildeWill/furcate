@@ -1,7 +1,0 @@
-module Furcate
-  class Merger
-    def self.check_for_conflicts: (String rootstock_name, String scion_name) -> Array[(Conflict|nil)]
-
-    def do_merge: (untyped resolved_conflicts) -> nil
-  end
-end
